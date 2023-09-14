@@ -9,6 +9,7 @@
 
 void execute_command(char *command, char **args)
 {
+	int status;
 	pid_t pid;
 	
 	if (command && args)
@@ -17,9 +18,12 @@ void execute_command(char *command, char **args)
 		if (pid == 0)
 		{
 			if (execve(command, args, NULL) == -1)
+			{
 				perror("Error:");
+				exit(1);
+			}
 			else
-				wait(NULL);
+				wait(&status);
 		}
 	}
 }
@@ -34,7 +38,8 @@ void execute_command(char *command, char **args)
 void handle_args(char **args)
 {
 	char *command = NULL, *full_command = NULL;
-	
+	struct stat st;
+
 	if (args)
 	{
 		command = args[0];
@@ -46,6 +51,8 @@ void handle_args(char **args)
 		}
 		else
 		{
+			if (stat(command, &st) == 0)
+				execute_command(command, args);
 			printf("command: %s\n", command);
 		}
 	}
