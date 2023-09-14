@@ -9,5 +9,10 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 
+int main(int argc, char **argv, char **env);
+int _putchar(char c);
+char *_getline(void);
+char **_strtok(char *line);
+char *_strdup(char *str);
 
 #endif
