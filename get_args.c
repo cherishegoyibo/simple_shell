@@ -17,7 +17,6 @@ void get_args(char *buffer, char *buffer_copy)
 	token = strtok(buffer, delimiter);
 	for (tokens_number = 0; token; tokens_number++)
 		token = strtok(NULL, delimiter);
-	printf("Tokens Number: %d\n", tokens_number);
 	args = malloc(sizeof(char *) * (tokens_number + 1));
 	if  (!args)
 	{

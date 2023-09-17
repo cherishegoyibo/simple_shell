@@ -12,12 +12,12 @@ char *get_command(char *command, char *token, char *path_copy)
 {
 	char *full_command = NULL;
 
-	if (!command || !token)
+	if (!command || !token || !path_copy)
 		return (NULL);
 	full_command = malloc(_strlen(command) + _strlen(token) + 2);
 	if (!full_command)
 	{
-		perror("malloc");
+		perror("Error: malloc error.");
 		free(path_copy);
 		exit(EXIT_FAILURE);
 	}
@@ -27,6 +27,7 @@ char *get_command(char *command, char *token, char *path_copy)
 	_strcat(full_command, "\0");
 	return (full_command);
 }
+
 /**
  * get_full_command_location - Gets the full command from the path.
  * @command: Command to check in the path.
@@ -44,8 +45,12 @@ char *get_full_command_location(char *command)
 	path = _getenv("PATH");
 	if (path)
 	{
-		printf("PATH: %s\n", path);
 		path_copy = malloc(sizeof(char) * (_strlen(path) + 1));
+		if (!path_copy)
+		{
+			perror("Error: malloc error.");
+			exit(1);
+		}
 		_strcpy(path_copy, path);
 		free(path);
 		token = strtok(path_copy, ":");

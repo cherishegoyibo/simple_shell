@@ -8,5 +8,5 @@
  */
 void handle_CTRL_C(int sig)
 {
-        (void)sig;
+	(void)sig;
 }

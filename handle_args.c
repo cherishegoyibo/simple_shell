@@ -4,14 +4,14 @@
  * execute_command - executes the command by forking new process.
  * @command: command to be executed.
  * @args: arguments.
- * Return: Nothing. 
+ * Return: Nothing.
  */
 
 void execute_command(char *command, char **args)
 {
 	int status;
 	pid_t pid;
-	
+
 	if (command && args)
 	{
 		pid = fork();
@@ -19,12 +19,12 @@ void execute_command(char *command, char **args)
 		{
 			if (execve(command, args, NULL) == -1)
 			{
-				perror("Error:");
+				perror("Error: executing the command.");
 				exit(1);
 			}
-			else
-				wait(&status);
 		}
+		else
+			wait(&status);
 	}
 }
 
@@ -43,17 +43,21 @@ void handle_args(char **args)
 	if (args)
 	{
 		command = args[0];
-		full_command = get_full_command_location(command);
-		if (full_command)
-		{	
-			execute_command(full_command, args);
-			free(full_command);
-		}
+		if (stat(command, &st) == 0)
+			execute_command(command, args);
 		else
 		{
-			if (stat(command, &st) == 0)
-				execute_command(command, args);
-			printf("command: %s\n", command);
+			full_command = get_full_command_location(command);
+			if (full_command)
+			{
+				execute_command(full_command, args);
+				free(full_command);
+			}
+			else
+			{
+				if (_strcmp(command, "env") == 0)
+					printf("environ varaibales\n");
+			}
 		}
 	}
 }

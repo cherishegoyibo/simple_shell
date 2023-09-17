@@ -17,7 +17,7 @@ int main(int ac, char **av)
 		interactive();
 	}
 	else
-	{		
+	{
 		noninteractive(av[0]);
 	}
 
