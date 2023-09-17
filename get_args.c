@@ -1,4 +1,24 @@
 #include "shell.h"
+
+/*
+ * __exit: exit the program and free memory.
+ * @args: arguments list.
+ * @buffer: buffer.
+ * @buffer_copy: copy of te buffer.
+ *
+ * Return: Nothing.
+*/
+void __exit(char **args, char *buffer, char *buffer_copy)
+{
+	int i;
+
+	for (i = 0 ; args[i] ; i++)
+		free(args[i]);
+	free(args);
+	free(buffer);
+	free(buffer_copy);
+	exit(0);
+}
 /**
  * get_args - gets the arguments.
  * @buffer: line entered by the user.
@@ -32,6 +52,8 @@ void get_args(char *buffer, char *buffer_copy)
 		i++;
 	}
 	args[i] = NULL;
+	if (_strcmp(args[0], "exit") == 0)
+		__exit(args, buffer, buffer_copy);
 	handle_args(args);
 	for (i = 0 ; args[i] ; i++)
 		free(args[i]);

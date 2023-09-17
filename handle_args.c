@@ -37,13 +37,15 @@ void execute_command(char *command, char **args)
 
 void handle_args(char **args)
 {
-	char *command = NULL, *full_command = NULL;
+	char *command = NULL, *full_command = NULL, *msg = NULL;
 	struct stat st;
 
 	if (args)
 	{
 		command = args[0];
-		if (stat(command, &st) == 0)
+		if (_strcmp(command, "env") == 0)
+			_env();
+		else if (stat(command, &st) == 0)
 			execute_command(command, args);
 		else
 		{
@@ -55,8 +57,11 @@ void handle_args(char **args)
 			}
 			else
 			{
-				if (_strcmp(command, "env") == 0)
-					printf("environ varaibales\n");
+				_strcpy(msg, args[0]);
+				_strcat(msg, ": ");
+				_strcat(msg, command);
+				_strcat(msg, ": not found\n");
+				_puts(msg);
 			}
 		}
 	}

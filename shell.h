@@ -24,5 +24,8 @@ void get_args(char *buffer, char *buffer_copy);
 void handle_args(char **args);
 char *get_full_command_location(char *command);
 char *_getenv(const char *name);
+void _env(void);
+int _putchar(char c);
+void _puts(char *str);
 
 #endif
