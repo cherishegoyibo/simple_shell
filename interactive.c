@@ -5,7 +5,7 @@
  *
  * Return: Nothing
  */
-void interactive(void)
+void interactive(char *program_name)
 {
 	char *buffer = NULL;
 	size_t buffer_size = 0;
@@ -22,7 +22,7 @@ void interactive(void)
 		}
 		if (_strcmp(buffer, "\n") != 0)
 		{
-			runShell(buffer, n_char);
+			runShell(buffer, n_char, program_name);
 		}
 	}
 	free(buffer);

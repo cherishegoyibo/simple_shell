@@ -26,7 +26,7 @@ void __exit(char **args, char *buffer, char *buffer_copy)
  *
  * Return: Nothing.
  */
-void get_args(char *buffer, char *buffer_copy)
+void get_args(char *buffer, char *buffer_copy, char *program_name)
 {
 	char *delimiter = " \t\n";
 	char *token, **args;
@@ -54,7 +54,7 @@ void get_args(char *buffer, char *buffer_copy)
 	args[i] = NULL;
 	if (_strcmp(args[0], "exit") == 0)
 		__exit(args, buffer, buffer_copy);
-	handle_args(args);
+	handle_args(args, program_name);
 	for (i = 0 ; args[i] ; i++)
 		free(args[i]);
 	free(args);

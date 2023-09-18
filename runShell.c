@@ -7,7 +7,7 @@
  *
  * Return: Nothing.
 */
-void runShell(char *buffer, ssize_t n_char)
+void runShell(char *buffer, ssize_t n_char, char *program_name)
 {
 	char *buffer_copy = NULL;
 
@@ -20,7 +20,7 @@ void runShell(char *buffer, ssize_t n_char)
 			exit(1);
 		}
 		_strcpy(buffer_copy, buffer);
-		get_args(buffer, buffer_copy);
+		get_args(buffer, buffer_copy, program_name);
 		free(buffer_copy);
 	}
 }

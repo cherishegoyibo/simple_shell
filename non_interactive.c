@@ -15,12 +15,11 @@ void noninteractive(char *program_name)
 	if (!program_name)
 		exit(0);
 	n_char = getline(&buffer, &buffer_size, stdin);
-	if (n_char != -1)
+	while (n_char >= 0)
 	{
-		buffer[_strlen(buffer) - 1] = '\0';
-		printf("%s: 1: %s: not found\n", program_name, buffer);
-		/*runShell(buffer, n_char);
-		free(buffer);
-		exit(0);*/
+		runShell(buffer, n_char, program_name);
+		n_char = getline(&buffer, &buffer_size, stdin);
 	}
+	free(buffer);
+	exit(0);
 }

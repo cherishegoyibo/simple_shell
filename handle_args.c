@@ -17,7 +17,7 @@ void execute_command(char *command, char **args)
 		pid = fork();
 		if (pid == 0)
 		{
-			if (execve(command, args, NULL) == -1)
+			if (execve(command, args, environ) == -1)
 			{
 				perror("Error: executing the command.");
 				exit(1);
@@ -35,7 +35,7 @@ void execute_command(char *command, char **args)
  * Return: Nothing.
  */
 
-void handle_args(char **args)
+void handle_args(char **args, char *program_name)
 {
 	char *command = NULL, *full_command = NULL, *msg = NULL, *test_msg;
 	struct stat st;
@@ -57,12 +57,13 @@ void handle_args(char **args)
 			}
 			else
 			{
-				test_msg = "bash: : command not found";
-				msg = malloc(sizeof(char) * (_strlen(test_msg) + _strlen(command) + 1));
-				_strcpy(msg, "bash: ");
+				test_msg = ": : command not found";
+				msg = malloc(sizeof(char) * (_strlen(test_msg) + _strlen(command) + _strlen(program_name) + 1));
+				_strcpy(msg, program_name);
+				_strcat(msg, ": ");
 				_strcat(msg, command);
 				_strcat(msg, ": command not found\0");
-				puts(msg);
+				_puts(msg);
 				free(msg);
 			}
 		}

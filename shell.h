@@ -12,15 +12,15 @@
 extern char **environ;
 
 void noninteractive(char *program_name);
-void interactive(void);
-void runShell(char *buffer, ssize_t n_char);
+void interactive(char *program_name);
+void runShell(char *buffer, ssize_t n_char, char *program_name);
 int _strlen(char *s);
 int _strcmp(const char *s1, const char *s2);
 char *_strcpy(char *dest, char *src);
 char *_strcat(char *dest, const char *src);
 void handle_CTRL_C(int sig);
-void get_args(char *buffer, char *buffer_copy);
-void handle_args(char **args);
+void get_args(char *buffer, char *buffer_copy, char *program_name);
+void handle_args(char **args, char *program_name);
 char *get_full_command_location(char *command);
 char *_getenv(const char *name);
 void _env(void);
