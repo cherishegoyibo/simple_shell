@@ -37,7 +37,7 @@ void execute_command(char *command, char **args)
 
 void handle_args(char **args)
 {
-	char *command = NULL, *full_command = NULL, *msg = NULL;
+	char *command = NULL, *full_command = NULL, *msg = NULL, *test_msg;
 	struct stat st;
 
 	if (args)
@@ -57,11 +57,13 @@ void handle_args(char **args)
 			}
 			else
 			{
-				_strcpy(msg, args[0]);
-				_strcat(msg, ": ");
+				test_msg = "bash: : command not found";
+				msg = malloc(sizeof(char) * (_strlen(test_msg) + _strlen(command) + 1));
+				_strcpy(msg, "bash: ");
 				_strcat(msg, command);
-				_strcat(msg, ": not found\n");
-				_puts(msg);
+				_strcat(msg, ": command not found\0");
+				puts(msg);
+				free(msg);
 			}
 		}
 	}
