@@ -4,6 +4,7 @@
  * runShell - runs the shell.
  * @buffer: line entered by the user.
  * @n_char: number of characters.
+ * @program_name: name of the program.
  *
  * Return: Nothing.
 */

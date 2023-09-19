@@ -2,6 +2,7 @@
 
 /**
  * interactive - run shell in interactive mode.
+ * @program_name: name of the program.
  *
  * Return: Nothing
  */

@@ -12,6 +12,8 @@ void __exit(char **args, char *buffer, char *buffer_copy)
 {
 	int i;
 
+	if (!args || !buffer || !buffer_copy)
+		exit(2);
 	for (i = 0 ; args[i] ; i++)
 		free(args[i]);
 	free(args);
@@ -23,6 +25,7 @@ void __exit(char **args, char *buffer, char *buffer_copy)
  * get_args - gets the arguments.
  * @buffer: line entered by the user.
  * @buffer_copy: copied buffer.
+ * @program_name: name of the program.
  *
  * Return: Nothing.
  */

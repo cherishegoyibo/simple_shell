@@ -21,5 +21,4 @@ void noninteractive(char *program_name)
 		n_char = getline(&buffer, &buffer_size, stdin);
 	}
 	free(buffer);
-	exit(0);
 }

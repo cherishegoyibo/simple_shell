@@ -31,7 +31,7 @@ void execute_command(char *command, char **args)
 /**
  * handle_args - Handles the args.
  * @args: contains the arguments.
- *
+ * @program_name: name of the program.
  * Return: Nothing.
  */
 
@@ -58,7 +58,8 @@ void handle_args(char **args, char *program_name)
 			else
 			{
 				test_msg = ": : command not found";
-				msg = malloc(sizeof(char) * (_strlen(test_msg) + _strlen(command) + _strlen(program_name) + 1));
+				msg = malloc(sizeof(char) *
+(_strlen(test_msg) + _strlen(command) + _strlen(program_name) + 1));
 				_strcpy(msg, program_name);
 				_strcat(msg, ": ");
 				_strcat(msg, command);
