@@ -8,5 +8,7 @@
  */
 void handle_CTRL_C(int sig)
 {
-        (void)sig;
+	(void)sig;
+	_putchar('\n');
+	exit(1);
 }

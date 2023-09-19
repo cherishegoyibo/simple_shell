@@ -17,8 +17,8 @@ char *_strcat(char *dest, const char *src)
 	if (src == NULL)
 		return (dest);
 	destPtr = dest + _strlen(dest);
-	while(*src != '\0')
+	while (*src != '\0')
 		*destPtr++ = *src++;
 	*destPtr = '\0';
-	return destPtr;
+	return (destPtr);
 }

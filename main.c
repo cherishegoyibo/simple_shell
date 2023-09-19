@@ -14,10 +14,10 @@ int main(int ac, char **av)
 	if (isatty(STDIN_FILENO))
 	{
 		signal(SIGINT, handle_CTRL_C);
-		interactive();
+		interactive(av[0]);
 	}
 	else
-	{		
+	{
 		noninteractive(av[0]);
 	}
 
