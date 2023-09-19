@@ -45,8 +45,6 @@ void handle_args(char **args, char *program_name)
 		command = args[0];
 		if (_strcmp(command, "env") == 0)
 			_env();
-		else if (stat(command, &st) == 0)
-			execute_command(command, args);
 		else
 		{
 			full_command = get_full_command_location(command);
@@ -55,6 +53,8 @@ void handle_args(char **args, char *program_name)
 				execute_command(full_command, args);
 				free(full_command);
 			}
+			else if (stat(command, &st) == 0)
+                        	execute_command(command, args);
 			else
 			{
 				test_msg = ": : command not found";
