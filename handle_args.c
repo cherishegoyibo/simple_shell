@@ -37,8 +37,6 @@ void execute_command(char *command, char **args)
 
 void handle_args(char **args, char *program_name)
 {
-	char *command = NULL, *full_command = NULL, *msg = NULL, *test_msg;
-	struct stat st;
 
 	if (args)
 	{
