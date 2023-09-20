@@ -54,7 +54,7 @@ void handle_args(char **args, char *program_name)
 				free(full_command);
 			}
 			else if (stat(command, &st) == 0)
-                        	execute_command(command, args);
+				execute_command(command, args);
 			else
 			{
 				test_msg = ": : command not found";

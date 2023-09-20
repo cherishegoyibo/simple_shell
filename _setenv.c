@@ -45,7 +45,7 @@ int _setenv(char *name, char *value)
 	var = _getenv(name);
 	if (var)
 	{
-		for ( i = 0; environ[i]; i++)
+		for (i = 0; environ[i]; i++)
 		{
 			var_copy = malloc(sizeof(char) * (_strlen(environ[i]) + 1));
 			if (!var_copy)
@@ -60,7 +60,7 @@ int _setenv(char *name, char *value)
 				free(var);
 				environ[i] = var_data(name, value);
 				free(var_copy);
-				return 0;
+				return (0);
 			}
 			free(var_copy);
 		}
@@ -70,7 +70,6 @@ int _setenv(char *name, char *value)
 		i = 0;
 		while (environ[i])
 			i++;
-
 		new_var = var_data(name, value);
 		 _strcpy(environ[i], new_var);
 		environ[i + 1] = NULL;

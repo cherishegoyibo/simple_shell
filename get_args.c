@@ -1,7 +1,7 @@
 #include "shell.h"
 
-/*
- * __exit: exit the program and free memory.
+/**
+ * __exit - exit the program and free memory.
  * @args: arguments list.
  * @buffer: buffer.
  * @buffer_copy: copy of te buffer.
