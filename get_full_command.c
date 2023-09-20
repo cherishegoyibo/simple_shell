@@ -70,5 +70,5 @@ char *get_full_command_location(char *command)
 		}
 		free(path_copy);
 	}
-	return (NULL);
+//	return (NULL);
 }
