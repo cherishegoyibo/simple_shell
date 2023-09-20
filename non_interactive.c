@@ -14,11 +14,13 @@ void noninteractive(char *program_name)
 
 	if (!program_name)
 		exit(0);
+
 	n_char = getline(&buffer, &buffer_size, stdin);
 	while (n_char >= 0)
 	{
 		runShell(buffer, n_char, program_name);
 		n_char = getline(&buffer, &buffer_size, stdin);
 	}
+
 	free(buffer);
 }
