@@ -24,13 +24,15 @@ typedef struct data
 
 void noninteractive(shell_data *sh_data, char *program_name);
 void interactive(shell_data *sh_data, char *program_name);
-void runShell(char *buffer, ssize_t n_char, char *program_name, shell_data *sh_data);
+void runShell(char *buffer, ssize_t n_char,
+		char *program_name, shell_data *sh_data);
 int _strlen(char *s);
 int _strcmp(const char *s1, const char *s2);
 char *_strcpy(char *dest, char *src);
 char *_strcat(char *dest, const char *src);
 void handle_CTRL_C(int sig);
-void get_args(char *buffer, char *buffer_copy, char *program_name, shell_data *sh_data);
+void get_args(char *buffer, char *buffer_copy,
+		char *program_name, shell_data *sh_data);
 void handle_args(char **args, char *program_name, shell_data *sh_data);
 char *get_full_command_location(char *command);
 char *_getenv(const char *name);
