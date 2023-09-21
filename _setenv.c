@@ -19,6 +19,11 @@ char *var_data(char *name, char *value)
 	value_length = _strlen(value);
 	length = name_length + value_length + 2;
 	env_data = malloc(sizeof(char) * (length));
+	if (!env_data)
+	{
+		perror("malloc error");
+		exit(1);
+	}
 	_strcpy(env_data, name);
 	_strcat(env_data, "=");
 	_strcat(env_data, value);
@@ -31,51 +36,48 @@ char *var_data(char *name, char *value)
  * _setenv - set environment variable.
  * @name: variable name.
  * @value: value.
+ * @sh_data: shell data struct.
  *
  * Return: 0 on success,
  *	-1 on failure.
  */
-int _setenv(char *name, char *value)
+int _setenv(char *name, char *value, shell_data *sh_data)
 {
-	int i = 0;/*, len = 0;*/
-	char *var, *var_copy = NULL, *var_name, *new_var;
+	int i = 0;
+	char *var_copy = NULL, *var_name, *new_var;
 
 	if (!name || !value)
 		return (-1);
-	var = _getenv(name);
-	if (var)
+	for (i = 0; sh_data->_environ[i]; i++)
 	{
-		for ( i = 0; environ[i]; i++)
+		var_copy = malloc(sizeof(char) * (_strlen(sh_data->_environ[i]) + 1));
+		if (!var_copy)
 		{
-			var_copy = malloc(sizeof(char) * (_strlen(environ[i]) + 1));
-			if (!var_copy)
-			{
-				perror("malloc");
-				exit(1);
-			}
-			var_copy = _strcpy(var_copy, environ[i]);
-			var_name = strtok(var_copy, "=");
-			if (_strcmp(var_name, name) == 0)
-			{
-				free(var);
-				environ[i] = var_data(name, value);
-				free(var_copy);
-				return 0;
-			}
-			free(var_copy);
+			perror("malloc");
+			exit(1);
 		}
+		var_copy = _strcpy(var_copy, sh_data->_environ[i]);
+		var_name = _strtok(var_copy, "=");
+		if (_strcmp(var_name, name) == 0)
+		{
+			new_var = var_data(name, value);
+			_strcpy(sh_data->_environ[i], new_var);
+			free(var_copy);
+			free(new_var);
+			return (0);
+		}
+		free(var_copy);
 	}
-	else
+	new_var = var_data(name, value);
+	sh_data->_environ[i] = malloc(sizeof(char) * (_strlen(new_var) + 1));
+	if (!sh_data->_environ[i])
 	{
-		i = 0;
-		while (environ[i])
-			i++;
-
-		new_var = var_data(name, value);
-		 _strcpy(environ[i], new_var);
-		environ[i + 1] = NULL;
-		free(new_var);
+		perror("realloc error");
+		exit(1);
 	}
-	free(var);
+	_strcpy(sh_data->_environ[i], new_var);
+	sh_data->_environ[i + 1] = malloc(sizeof(char));
+	sh_data->_environ[i + 1] = NULL;
+	free(new_var);
 	return (0);
 }

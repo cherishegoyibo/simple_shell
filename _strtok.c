@@ -1,28 +1,26 @@
 #include "shell.h"
 
 /**
- * is_delim - checks if a character is a delimiter
+ * is_delimiter - It checks if a character is a delimiter
  * @c: character to check
  * @delim: delimiter character
  * Return: 1 on success, else 0
  */
-int is_delim(char c, const char *delim)
+int is_delimiter(char c, const char *delim)
 {
 	size_t i = 0;
 
 	for (i = 0; delim[i] != '\0'; i++)
 	{
 		if (c == delim[i])
-		{
 			return (1);
-		}
 	}
 	return (0);
 }
 /**
- * _strtok - a function that tokinize string into tokens using delimiter
- * @str: string
- * @delim: Delimiter
+ * _strtok - It tokinizes the string into tokens using delimiter.
+ * @str: string to be tokinized.
+ * @delim: Delimiter used in tokenization.
  *
  * Return: pointer to the next token, else NULL
  */
@@ -40,7 +38,7 @@ char *_strtok(char *str, const char *delim)
 		return (NULL);
 	}
 
-	while (*p != '\0' && is_delim(*p, delim))
+	while (*p != '\0' && is_delimiter(*p, delim))
 	{
 		p++;
 	}
@@ -51,7 +49,7 @@ char *_strtok(char *str, const char *delim)
 	}
 
 	strt = p;
-	while (*p != '\0' && !is_delim(*p, delim))
+	while (*p != '\0' && !is_delimiter(*p, delim))
 	{
 		p++;
 	}
