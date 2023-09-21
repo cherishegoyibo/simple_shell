@@ -2,11 +2,12 @@
 
 /**
  * noninteractive - run shell in noninteractive mode.
+ * @sh_data: shell data struct.
  * @program_name: name of the program.
  *
  * Return: Nothing.
  */
-void noninteractive(char *program_name)
+void noninteractive(shell_data *sh_data, char *program_name)
 {
 	char *buffer = NULL;
 	size_t buffer_size = 0;
@@ -14,13 +15,10 @@ void noninteractive(char *program_name)
 
 	if (!program_name)
 		exit(0);
-
-	n_char = getline(&buffer, &buffer_size, stdin);
-	while (n_char >= 0)
-	{
-		runShell(buffer, n_char, program_name);
+	do {
 		n_char = getline(&buffer, &buffer_size, stdin);
-	}
-
+		if (n_char > 1)
+			runShell(buffer, n_char, program_name, sh_data);
+	} while (n_char >= 0);
 	free(buffer);
 }
